@@ -1,0 +1,20 @@
+- [x] Configuration google cloud
+- [x] Faire marcher projet localement
+- [] Faire marcher sur docker
+- [x] Configuration et integration services google
+    - [x] Google drive
+    - [] Google calendar
+    - [x] Google drive
+- [x] Prise en main projet
+- [x] Comprehension projet
+- [] MCD
+- [] Reinitialisation des donnees
+    - [] Bouton reset
+    - [] Fonction resetDatabase()
+    - [] ResetDbController
+    - [] Integration
+- [] Import de fichier csv
+    - [] Formulaire d'importation
+    - [] Fonction import(nomTable, fichierCsv)
+    - [] ImportController
+    - [] Integration 
