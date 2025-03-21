@@ -121,7 +121,7 @@ public class LeadController {
         model.addAttribute("event", eventDisplay);
         model.addAttribute("attachments", attachments);
         return "lead/show-details";
-    }
+    } 
 
     @GetMapping("/assigned-leads")
     public String showAssignedEmployeeLeads(Authentication authentication, Model model) {

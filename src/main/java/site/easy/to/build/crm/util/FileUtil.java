@@ -3,6 +3,8 @@ package site.easy.to.build.crm.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import site.easy.to.build.crm.entity.File;
 import site.easy.to.build.crm.entity.GoogleDriveFile;
 import site.easy.to.build.crm.entity.OAuthUser;
@@ -10,7 +12,7 @@ import site.easy.to.build.crm.google.model.gmail.Attachment;
 import site.easy.to.build.crm.google.service.drive.GoogleDriveApiService;
 import site.easy.to.build.crm.service.drive.GoogleDriveFileService;
 import site.easy.to.build.crm.service.file.FileService;
-
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -34,6 +36,40 @@ public class FileUtil {
         this.fileService = fileService;
     }
 
+    public static <T> HashMap<String, List<Object>> importCsv(String filePath, LineMapper<T> lineMapper)
+    {
+        HashMap<String, List<Object>> response = new HashMap<>();
+        List<T> items = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
+        try
+        {
+            CSVReader csvReader = new CSVReader(new FileReader(filePath));
+            String[] nextLine;
+            int lineNumber = 1;
+            while ((nextLine = csvReader.readNext()) != null)
+            {
+                try
+                {
+                    T item = lineMapper.mapLine(nextLine, lineNumber);
+                    items.add(item);
+                }
+                catch (Exception e)
+                {
+                    errors.add("Erreur lors du mappage de la ligne " + (lineNumber-1) + ": " + e.getMessage());
+                }
+                lineNumber++;
+            }
+        }
+        catch (IOException | CsvException e)
+        {
+            System.err.println("Erreur lors de la lecture du fichier CSV: " + e.getMessage());
+        }
+        items.remove(0);
+        response.put("result", Collections.singletonList(items));
+        response.put("error", Collections.singletonList(errors));
+        return response;
+    }
+    
     public List<File> convertAttachmentsToFiles(List<Attachment> attachments) {
         List<File> files = new ArrayList<>();
         for (Attachment attachment : attachments) {
