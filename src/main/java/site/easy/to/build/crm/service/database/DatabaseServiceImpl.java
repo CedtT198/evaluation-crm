@@ -31,6 +31,10 @@ public class DatabaseServiceImpl implements DatabaseService {
         
         jdbcTemplate.execute("SET FOREIGN_KEY_CHECKS=0");
 
+        jdbcTemplate.execute("TRUNCATE TABLE taux_alerte;");
+        jdbcTemplate.execute("TRUNCATE TABLE depenses_ticket;");
+        jdbcTemplate.execute("TRUNCATE TABLE depenses_lead;");
+        jdbcTemplate.execute("TRUNCATE TABLE budget;");
         jdbcTemplate.execute("TRUNCATE TABLE google_drive_file;");
         jdbcTemplate.execute("TRUNCATE TABLE file;");
         jdbcTemplate.execute("TRUNCATE TABLE ticket_settings;");
@@ -40,8 +44,8 @@ public class DatabaseServiceImpl implements DatabaseService {
         jdbcTemplate.execute("TRUNCATE TABLE trigger_contract;");
         jdbcTemplate.execute("TRUNCATE TABLE trigger_ticket;");
         jdbcTemplate.execute("TRUNCATE TABLE trigger_lead;");
-        jdbcTemplate.execute("TRUNCATE TABLE customer;");
-        jdbcTemplate.execute("TRUNCATE TABLE customer_login_info;");
+        // jdbcTemplate.execute("TRUNCATE TABLE customer;");
+        // jdbcTemplate.execute("TRUNCATE TABLE customer_login_info;");
         jdbcTemplate.execute("TRUNCATE TABLE email_template;");
         jdbcTemplate.execute("TRUNCATE TABLE employee;");
         
@@ -55,8 +59,8 @@ public class DatabaseServiceImpl implements DatabaseService {
             throw new Exception("Line per table cannot be under 1.");
         }
         
-        jdbcTemplate.execute("CALL generate_random_customer_logins("+nbLine+");");
-        jdbcTemplate.execute("CALL generate_random_customers("+nbLine+");");
+        // jdbcTemplate.execute("CALL generate_random_customer_logins("+nbLine+");");
+        // jdbcTemplate.execute("CALL generate_random_customers("+nbLine+");");
         jdbcTemplate.execute("CALL generate_random_trigger_leads("+nbLine+");");
         jdbcTemplate.execute("CALL generate_random_trigger_tickets("+nbLine+");");
         jdbcTemplate.execute("CALL generate_random_trigger_contracts("+nbLine+");");

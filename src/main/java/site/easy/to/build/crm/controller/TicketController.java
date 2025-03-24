@@ -90,6 +90,22 @@ public class TicketController {
         model.addAttribute("tickets",tickets);
         return "ticket/my-tickets";
     }
+    
+    @GetMapping("/expenses")
+    public String createFormExpensesLead(Authentication authentication, Model model) {
+        int userId = authenticationUtils.getLoggedInUserId(authentication);
+        List<Ticket> tickets = ticketService.findManagerTickets(userId);
+        List<Customer> customers;
+        try {
+            customers = customerService.findAll();
+        } catch (Exception e){
+            return "error/500";
+        }
+        model.addAttribute("customers",customers);
+        model.addAttribute("tickets", tickets);
+        model.addAttribute("expenses", new DepensesTicket());
+        return "expenses/ticket";
+    }
 
     @GetMapping("/assigned-tickets")
     public String showEmployeeTicket(Model model, Authentication authentication) {

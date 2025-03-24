@@ -138,6 +138,22 @@ public class LeadController {
         model.addAttribute("leads", leads);
         return "lead/show-my-leads";
     }
+    
+    @GetMapping("/expenses")
+    public String createFormExpensesLead(Authentication authentication, Model model) {
+        int userId = authenticationUtils.getLoggedInUserId(authentication);
+        List<Lead> leads = leadService.findCreatedLeads(userId);
+        List<Customer> customers;
+        try {
+            customers = customerService.findAll();
+        } catch (Exception e){
+            return "error/500";
+        }
+        model.addAttribute("customers",customers);
+        model.addAttribute("leads", leads);
+        model.addAttribute("expenses", new DepensesLead());
+        return "expenses/lead";
+    }
 
     @GetMapping("/manager/all-leads")
     public String showAllLeads(Model model) {

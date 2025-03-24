@@ -45,6 +45,7 @@ public class CustomerLoginController {
         if(!customerLoginInfo1.isPasswordSet()){
             String hashPassword = passwordEncoder.encode(customerLoginInfo.getPassword());
             customerLoginInfo1.setPassword(hashPassword);
+            // customerLoginInfo1.setPassword(customerLoginInfo.getPassword());
             customerLoginInfo1.setPasswordSet(true);
             customerLoginInfoService.save(customerLoginInfo1);
         }

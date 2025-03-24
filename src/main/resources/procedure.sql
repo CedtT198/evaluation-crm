@@ -76,6 +76,7 @@ BEGIN
         VALUES (
             CONCAT('user', FLOOR(RAND() * 10000)), 
             SHA2(CONCAT('pass', FLOOR(RAND() * 10000)), 256), 
+            -- '1234', 
             UUID(), 
             FLOOR(RAND() * 2) -- Génère 0 ou 1 pour password_set
         );
@@ -635,3 +636,4 @@ CALL generate_random_trigger_contracts(10);
 -- CALL generate_random_ticket_settings(10);
 -- CALL generate_random_file_data(10);
 -- CALL generate_random_google_drive_file_data(10);
+
