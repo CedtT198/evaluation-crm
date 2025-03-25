@@ -18,11 +18,16 @@ public class TauxAlerteRestController {
         this.tauxAlerteService = tauxAlerteService;
     }
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public String save(@RequestBody TauxAlerte taux) {
-        System.out.println("Connectec to api taux alerte"); 
+        taux.setId(null);
+        System.out.println("Connected to api taux alerte"); 
         try {
+            // System.out.println(taux.getId());
+            // System.out.println(taux.getAmount());
+            // System.out.println(taux.getDateTaux());
             tauxAlerteService.save(taux);
+            // System.out.println("Insertion done successfuly.");
             return "Insertion done successfuly.";
         } catch (Exception e) {
             e.printStackTrace();

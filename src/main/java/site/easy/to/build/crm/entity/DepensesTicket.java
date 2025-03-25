@@ -14,7 +14,7 @@ public class DepensesTicket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Integer id;
-
+ 
     @Column(name = "amount", precision = 10, scale = 0)
     @NotNull
     @DecimalMin(value = "0.00", inclusive = true, message = "Amount must be greater than or equal to 0.00")

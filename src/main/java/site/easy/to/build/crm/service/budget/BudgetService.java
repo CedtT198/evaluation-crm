@@ -9,7 +9,7 @@ import site.easy.to.build.crm.entity.Customer;
 public interface BudgetService {
     public boolean isOverBudget(BigDecimal expense, LocalDate date, Customer idCustomer) throws Exception ;
     public boolean isLimitReached(BigDecimal expense, LocalDate date, Customer idCustomer) throws Exception ;
-    BigDecimal getLimit(Integer idCustomer);
+    BigDecimal getLimit(Integer idCustomer, LocalDate date);
     Budget save(Budget budget) throws Exception ;
     List<Budget> findByCustomerId(Integer customerId);
 }

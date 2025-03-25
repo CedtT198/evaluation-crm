@@ -64,5 +64,7 @@ public class DatabaseServiceImpl implements DatabaseService {
         jdbcTemplate.execute("CALL generate_random_trigger_leads("+nbLine+");");
         jdbcTemplate.execute("CALL generate_random_trigger_tickets("+nbLine+");");
         jdbcTemplate.execute("CALL generate_random_trigger_contracts("+nbLine+");");
+        jdbcTemplate.execute("CALL generate_random_depenses_ticket("+nbLine+");");
+        jdbcTemplate.execute("CALL generate_random_depenses_lead("+nbLine+");");
     }
 }

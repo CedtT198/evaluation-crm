@@ -6,6 +6,8 @@ import java.util.List;
 import site.easy.to.build.crm.entity.DepensesLead;
 
 public interface DepensesLeadService {
+    // List<DepensesLead> findAllGroupByCustomer(LocalDate start, LocalDate end);
+    List<DepensesLead> findAllOrderAndFilteredByDate(LocalDate start, LocalDate end);
     DepensesLead findById(Integer id);
     DepensesLead update(DepensesLead depensesLead);
     void delete(Integer id);

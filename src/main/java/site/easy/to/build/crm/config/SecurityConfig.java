@@ -55,6 +55,7 @@ public class SecurityConfig {
 
         http.csrf((csrf) -> csrf
                 .csrfTokenRepository(httpSessionCsrfTokenRepository)
+                .ignoringRequestMatchers("/api/**")
         );
 
         http.
@@ -74,6 +75,7 @@ public class SecurityConfig {
                         .requestMatchers("/employee/**").hasAnyRole("MANAGER", "EMPLOYEE")
                         .requestMatchers("/customer/**").hasRole("CUSTOMER")
                         .anyRequest().authenticated()
+                        // .anyRequest().permitAll() 
                 )
 
                 .formLogin((form) -> form
@@ -127,6 +129,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/**/manager/**")).hasRole("MANAGER")
                         .anyRequest().authenticated()
+                        // .anyRequest().permitAll()
                 )
 
                 .formLogin((form) -> form

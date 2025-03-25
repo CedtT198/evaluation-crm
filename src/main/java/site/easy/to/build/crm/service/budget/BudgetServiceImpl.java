@@ -35,7 +35,7 @@ public class BudgetServiceImpl implements BudgetService {
 
         BigDecimal depTotal = depLead.add(depTicket).add(expense);
 
-        BigDecimal totalBudget = budgetRepository.getTotalAmount(idCustomer);
+        BigDecimal totalBudget = budgetRepository.getTotalAmount(idCustomer, date);
         if (depTotal.compareTo(totalBudget) == 1) {
             // googleGmailApiService.sendEmail(
             //     null,
@@ -60,7 +60,7 @@ public class BudgetServiceImpl implements BudgetService {
         BigDecimal depTotal = depLead.add(depTicket).add(expense);
         System.out.println("depTotal "+depTotal.intValue());
 
-        BigDecimal limit = getLimit(idCustomer);
+        BigDecimal limit = getLimit(idCustomer, date);
         if (depTotal.compareTo(limit) == 1 && limit.intValue()!=0) {
             // googleGmailApiService.sendEmail(
             //     null,
@@ -74,13 +74,13 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public BigDecimal getLimit(Integer idCustomer) {
+    public BigDecimal getLimit(Integer idCustomer, LocalDate date) {
         TauxAlerte tauxAlerte = tauxAlerteService.getMostRecentTaux();
         if (tauxAlerte == null) {
             return BigDecimal.ZERO;
         }
         
-        BigDecimal totalBudget = budgetRepository.getTotalAmount(idCustomer);
+        BigDecimal totalBudget = budgetRepository.getTotalAmount(idCustomer, date);
         if (totalBudget == null) {
             return BigDecimal.ZERO;
         }

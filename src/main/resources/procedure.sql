@@ -618,6 +618,86 @@ CALL generate_random_google_drive_file_data(10);
 -- 
 -- 
 -- 
+
+
+
+
+
+-- 
+-- depenses ticket
+-- 
+
+DELIMITER //
+
+CREATE PROCEDURE generate_random_depenses_ticket(IN num INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE random_ticket_id INT;
+    DECLARE random_description VARCHAR(255);
+    DECLARE random_date_depense DATETIME;
+    DECLARE random_amount DECIMAL(10, 2);
+    DECLARE random_summary VARCHAR(255);
+    DECLARE random_confirm TINYINT(1);
+
+    WHILE i < num DO
+        SELECT ticket_id INTO random_ticket_id FROM trigger_ticket ORDER BY RAND() LIMIT 1;
+        SET random_description = CONCAT('Description ', FLOOR(RAND() * 100));
+        SET random_date_depense = NOW() - INTERVAL FLOOR(RAND() * 365) DAY + INTERVAL FLOOR(RAND() * 24) HOUR + INTERVAL FLOOR(RAND() * 60) MINUTE;
+        SET random_amount = ROUND(RAND() * 10000, 2);
+        SET random_summary = CONCAT('Summary ', FLOOR(RAND() * 100));
+        SET random_confirm = 1;
+
+        INSERT INTO depenses_ticket (date_depense, ticket_id, description, amount, summary, confirm) 
+        VALUES (random_date_depense, random_ticket_id, random_description, random_amount, random_summary, random_confirm);
+
+        SET i = i + 1;
+    END WHILE;
+END//
+
+DELIMITER ;
+
+-- CALL generate_random_depenses_ticket(10);
+-- 
+-- 
+-- 
+
+
+-- 
+-- depenses lead
+-- 
+
+DELIMITER //
+
+CREATE PROCEDURE generate_random_depenses_lead(IN num INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE random_lead_id INT;
+    DECLARE random_description VARCHAR(255);
+    DECLARE random_date_depense DATETIME;
+    DECLARE random_amount DECIMAL(10, 2);
+    DECLARE random_summary VARCHAR(255);
+    DECLARE random_confirm TINYINT(1);
+
+    WHILE i < num DO
+        SELECT lead_id INTO random_lead_id FROM trigger_lead ORDER BY RAND() LIMIT 1;
+        SET random_description = CONCAT('Description ', FLOOR(RAND() * 100));
+        SET random_date_depense = NOW() - INTERVAL FLOOR(RAND() * 365) DAY + INTERVAL FLOOR(RAND() * 24) HOUR + INTERVAL FLOOR(RAND() * 60) MINUTE;
+        SET random_amount = ROUND(RAND() * 10000, 2);
+        SET random_summary = CONCAT('Summary ', FLOOR(RAND() * 100));
+        SET random_confirm = 1;
+
+        INSERT INTO depenses_lead (date_depense, lead_id, description, amount, summary, confirm) 
+        VALUES (random_date_depense, random_lead_id, random_description, random_amount, random_summary, random_confirm);
+
+        SET i = i + 1;
+    END WHILE;
+END//
+
+DELIMITER ;
+
+-- CALL generate_random_depenses_lead(10);
+-- 
+-- 
 -- 
 
 
@@ -636,4 +716,6 @@ CALL generate_random_trigger_contracts(10);
 -- CALL generate_random_ticket_settings(10);
 -- CALL generate_random_file_data(10);
 -- CALL generate_random_google_drive_file_data(10);
+CALL generate_random_depenses_ticket(10);
+CALL generate_random_depenses_lead(10);
 

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.easy.to.build.crm.entity.DepensesLead;
 import site.easy.to.build.crm.repository.DepensesLeadRepository;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -51,5 +50,13 @@ public class DepensesLeadServiceImpl implements DepensesLeadService {
         return depensesLeadRepository.findById(id).get();
     }
 
+    @Override
+    public List<DepensesLead> findAllOrderAndFilteredByDate(LocalDate start, LocalDate end) {
+        return depensesLeadRepository.findAllOrderAndFilteredByDate(start, end);
+    }
 
+    // @Override
+    // public List<DepensesLead> findAllGroupByCustomer(LocalDate start, LocalDate end) {
+    //     return depensesLeadRepository.findAllGroupByCustomer(start, end);
+    // }
 }

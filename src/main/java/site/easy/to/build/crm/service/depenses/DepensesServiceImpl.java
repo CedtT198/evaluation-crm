@@ -4,13 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.easy.to.build.crm.entity.Depenses;
 import site.easy.to.build.crm.repository.DepensesRepository;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class DepensesServiceImpl implements DepensesService {
-
+    
     @Autowired
     private DepensesRepository depensesRepository;
+    
+    // @Override
+    // public List<Depenses> findAllGroupByCustomer(LocalDate start, LocalDate end) {
+    //     return depensesRepository.findAllGroupByCustomer(start, end);
+    // }
+    
+    // @Override
+    // public List<Depenses> findAllGroupByCustomer() {
+    //     return depensesRepository.findAllGroupByCustomer();
+    // }
 
     @Override
     public List<Depenses> findAllDepensesPerCustomer() {

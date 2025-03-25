@@ -17,8 +17,13 @@ public class DepensesRestController {
         this.depensesService = depensesService;
     }
 
+    // @GetMapping("/all-per-customer")
+    // public List<Depenses> findAllDepensesPerCustomer() {
+    //     return depensesService.findAllGroupByCustomer();
+    // }
+    
     @GetMapping("/all")
-    public List<Depenses> findAllDepensesPerCustomer() {
+    public List<Depenses> findAllDepenses() {
         System.out.println("Get all depenses");
         return depensesService.findAllDepensesPerCustomer();
     }

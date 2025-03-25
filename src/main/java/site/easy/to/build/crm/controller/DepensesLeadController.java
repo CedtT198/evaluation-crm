@@ -32,6 +32,7 @@ public class DepensesLeadController {
 
     @PostMapping("/save")
     public String getAllCustomers(@ModelAttribute DepensesLead depensesLead, RedirectAttributes redirectAttributes, Model model){
+        depensesLead.setConfirm(true);
         try {
             Lead lead = leadService.findByLeadId(depensesLead.getLead().getLeadId());
             if (budgetService.isLimitReached(depensesLead.getAmount(), depensesLead.getDateDepense(), lead.getCustomer())) {
@@ -40,7 +41,7 @@ public class DepensesLeadController {
                 return "redirect:/employee/lead/expenses";
             }
             if (budgetService.isOverBudget(depensesLead.getAmount(), depensesLead.getDateDepense(), lead.getCustomer())) {
-                depensesLead.setConfirm(true);
+                depensesLead.setConfirm(false);
                 // depensesLeadService.save(depensesLead);
                 // model.addAttribute("depenses", depensesLead);
                 redirectAttributes.addFlashAttribute("warning", "Over budget. Insertion pending waiting for customer confirmation to validate it.");

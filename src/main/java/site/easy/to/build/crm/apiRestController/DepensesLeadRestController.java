@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.easy.to.build.crm.entity.DepensesLead;
 import site.easy.to.build.crm.service.depenses.DepensesLeadService;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -35,4 +37,9 @@ public class DepensesLeadRestController {
         depensesLeadService.delete(id);
         return "Expenses deleted successfuly.";
     }
+    
+    // @GetMapping("/all-filtered-date")
+    // public List<DepensesLead> getFilteredByDate(@PathVariable LocalDate start, @PathVariable LocalDate end) {
+    //     return depensesLeadService.findAllOrderAndFilteredByDate(start, end);
+    // }
 }

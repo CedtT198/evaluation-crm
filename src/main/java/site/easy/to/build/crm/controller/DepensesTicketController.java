@@ -32,6 +32,7 @@ public class DepensesTicketController {
 
     @PostMapping("/save")
     public String getAllCustomers(@ModelAttribute DepensesTicket depensesTicket, RedirectAttributes redirectAttributes, Model model){
+        depensesTicket.setConfirm(true); 
         try {
             Ticket ticket = ticketService.findByTicketId(depensesTicket.getTicket().getTicketId());
             if (budgetService.isLimitReached(depensesTicket.getAmount(), depensesTicket.getDateDepense(), ticket.getCustomer())) {
@@ -40,7 +41,7 @@ public class DepensesTicketController {
                 // return "redirect:/employee/ticket/expenses";
             }
             if (budgetService.isOverBudget(depensesTicket.getAmount(), depensesTicket.getDateDepense(), ticket.getCustomer())) {
-                depensesTicket.setConfirm(true);
+                depensesTicket.setConfirm(false);
                 // depensesTicketService.save(depensesTicket);
                 // model.addAttribute("depenses", depensesTicket);
                 redirectAttributes.addFlashAttribute("warning", "Over budget. Insertion pending waiting for customer confirmation to validate it.");
