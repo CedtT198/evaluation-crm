@@ -45,6 +45,16 @@ public class DepensesLead {
         this.description = description;
         this.summary = summary;
     }
+    public DepensesLead(Integer id, BigDecimal amount,
+            LocalDate dateDepense, Lead lead, String description, String summary, boolean confirm) {
+        this.id = id;
+        this.amount = amount;
+        this.dateDepense = dateDepense;
+        this.lead = lead;
+        this.description = description;
+        this.summary = summary;
+        this.confirm = confirm;
+    }
 
     public Integer getId() {
         return id;

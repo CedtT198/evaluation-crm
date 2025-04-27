@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.easy.to.build.crm.entity.DepensesLead;
+import site.easy.to.build.crm.entity.DepensesTicket;
+import site.easy.to.build.crm.entity.Lead;
 import site.easy.to.build.crm.service.depenses.DepensesLeadService;
+import site.easy.to.build.crm.service.lead.LeadService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,10 +18,12 @@ import java.util.List;
 public class DepensesLeadRestController {
 
     private final DepensesLeadService depensesLeadService;
+    private final LeadService leadService;
     
     @Autowired
-    public DepensesLeadRestController(DepensesLeadService depensesLeadService) {
+    public DepensesLeadRestController(DepensesLeadService depensesLeadService, LeadService leadService) {
         this.depensesLeadService = depensesLeadService;
+        this.leadService = leadService;
     }
     
     @GetMapping("/all")
@@ -29,12 +34,16 @@ public class DepensesLeadRestController {
 
     @PostMapping("/update")
     public DepensesLead update(@RequestBody DepensesLead dep) {
-        return depensesLeadService.update(dep);
+        DepensesLead d = depensesLeadService.findById(dep.getId());
+        d.setAmount(dep.getAmount());
+        return depensesLeadService.update(d);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
-        depensesLeadService.delete(id);
+        // System.out.println("id "+id);
+        Lead lead = leadService.findByLeadId(id);
+        leadService.delete(lead);
         return "Expenses deleted successfuly.";
     }
     
