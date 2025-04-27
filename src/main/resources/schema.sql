@@ -505,3 +505,19 @@ CREATE TABLE IF NOT EXISTS `google_drive_file` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+
+-- TRUNCATE Table google_drive_file;
+-- TRUNCATE Table file;
+-- TRUNCATE Table ticket_settings;
+-- TRUNCATE Table lead_settings;
+-- TRUNCATE Table lead_action;
+-- TRUNCATE Table contract_settings;
+-- TRUNCATE Table trigger_contract;
+-- TRUNCATE Table trigger_ticket;
+-- TRUNCATE Table trigger_lead;
+-- TRUNCATE Table customer;
+-- TRUNCATE Table customer_login_info;
+-- TRUNCATE Table email_template;
+-- TRUNCATE Table employee;

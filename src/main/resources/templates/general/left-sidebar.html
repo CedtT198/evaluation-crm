@@ -25,6 +25,25 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-small-cap">--- Files</li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">
+                        <i class="fas fa-file-contract"></i>
+                        <span class="hide-menu">Import</span>
+                    </a>
+                    <ul class="collapse">
+                        <li><a th:href="${home + 'import/create'}">Import CSV file</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-small-cap">--- Expenses</li>
+                <li th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" >
+                    <a href="http://localhost:5014" target="_blank">
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>Dashboard expenses</span>
+                    </a>
+                </li>
+
                 <li class="nav-small-cap">--- Settings</li>
                 <li>
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">
@@ -39,6 +58,13 @@
                                 <li><a th:href="${home + 'employee/settings/email/contract'}">Contract settings</a></li>
                                 <li><a th:href="${home + 'employee/settings/email/lead'}">Lead Settings</a></li>
                                 <li><a th:href="${home + 'employee/settings/email/ticket'}">Ticket Settings</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="has-arrow">Database setting</a>
+                            <ul class="collapse">
+                                <li><a th:href="${home + 'database/reset'}">Clear data</a></li>
+                                <li><a th:href="${home + 'database/generate'}">Generate random data</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -99,6 +125,7 @@
                         <li><a th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" th:href="${home + 'employee/customer/manager/all-customers'}">All customers</a></li>
                         <li><a th:href="${home + 'employee/customer/my-customers'}">My customers</a></li>
                         <li><a th:href="${home + 'employee/customer/create-customer'}">Create customer</a></li>
+                        <li><a th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" th:href="${home + 'employee/customer/manager/customer-budget'}">Manage budget</a></li>
                     </ul>
                 </li>
                 <li class="nav-small-cap">--- Tickets</li>
@@ -112,6 +139,7 @@
                         <li><a th:href="${home + 'employee/ticket/assigned-tickets'}">Assigned tickets</a></li>
                         <li><a th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" th:href="${home + 'employee/ticket/created-tickets'}">Created tickets</a></li>
                         <li><a th:href="${home + 'employee/ticket/create-ticket'}">Create ticket</a></li>
+                        <li><a th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" th:href="${home + 'employee/ticket/expenses'}">Expenses</a></li>
                     </ul>
                 </li>
                 <li class="nav-small-cap">--- Leads</li>
@@ -126,6 +154,7 @@
                         <li><a th:href="${home + 'employee/lead/assigned-leads'}">Assigned Leads</a></li>
                         <li><a th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" th:href="${home + 'employee/lead/created-leads'}">Created Leads</a></li>
                         <li><a th:href="${home + 'employee/lead/create'}">Create new Lead</a></li>
+                        <li><a th:if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" th:href="${home + 'employee/lead/expenses'}">Expenses</a></li>
                     </ul>
                 </li>
                 <li class="nav-small-cap">--- Contracts</li>
@@ -201,6 +230,14 @@
                         <span class="hide-menu">My Leads</span>
                     </a>
                 </li>
+                
+                <li class="nav-small-cap"> Expenses</li>
+                <li>
+                    <a class="waves-effect waves-dark" th:href="${home + 'customer/expenses'}">
+                        <i class="fas fa-pencil-alt"></i>
+                        <span class="hide-menu">All not confirm</span>
+                    </a>
+                </li> 
 
                 <li class="nav-small-cap">--- Contracts</li>
                 <li>

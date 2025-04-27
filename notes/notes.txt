@@ -8,3 +8,6 @@ json format :
 
 
 dbdiagram.io
+
+no atao generation random
+- contract_settings

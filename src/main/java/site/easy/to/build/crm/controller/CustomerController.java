@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import site.easy.to.build.crm.entity.Budget;
 import site.easy.to.build.crm.entity.Customer;
 import site.easy.to.build.crm.entity.CustomerLoginInfo;
 import site.easy.to.build.crm.entity.OAuthUser;
@@ -26,7 +27,6 @@ import site.easy.to.build.crm.service.user.UserService;
 import site.easy.to.build.crm.util.AuthenticationUtils;
 import site.easy.to.build.crm.util.AuthorizationUtil;
 import site.easy.to.build.crm.util.EmailTokenUtils;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -69,6 +69,19 @@ public class CustomerController {
         }
         model.addAttribute("customers",customers);
         return "customer/all-customers";
+    }
+
+    @GetMapping("/manager/customer-budget")
+    public String manageCustomerBudget(Model model){
+        List<Customer> customers;
+        try {
+            customers = customerService.findAll();
+        } catch (Exception e){
+            return "error/500";
+        }
+        model.addAttribute("customers",customers);
+        model.addAttribute("budget",new Budget());
+        return "customer/budget";
     }
 
     @GetMapping("/my-customers")

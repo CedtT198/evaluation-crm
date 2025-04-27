@@ -1,3 +1,4 @@
 # Remarques
-- Pas de page dynamique cote thymeleaf, les header et footer sont repete a chaque page de maniere statique
+- misy valeurs tokony dynamiques fa static napetaka direct, ohatra status lead
+- ny delete sy ny update tsy mitahiry données fa mamafa
 

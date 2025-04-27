@@ -12,6 +12,7 @@ import site.easy.to.build.crm.google.model.gmail.Attachment;
 import site.easy.to.build.crm.service.contract.ContractService;
 import site.easy.to.build.crm.service.customer.CustomerLoginInfoService;
 import site.easy.to.build.crm.service.customer.CustomerService;
+import site.easy.to.build.crm.service.depenses.DepensesService;
 import site.easy.to.build.crm.service.file.FileService;
 import site.easy.to.build.crm.service.lead.LeadService;
 import site.easy.to.build.crm.service.ticket.TicketService;
@@ -34,7 +35,10 @@ public class CustomerProfileController {
     private final ContractService contractService;
     private final LeadService leadService;
     private final FileService fileService;
-    public CustomerProfileController(CustomerService customerService, AuthenticationUtils authenticationUtils, CustomerLoginInfoService customerLoginInfoService, UserService userService, TicketService ticketService, ContractService contractService, LeadService leadService, FileService fileService) {
+    private final DepensesService depensesService;
+    
+    public CustomerProfileController(CustomerService customerService, AuthenticationUtils authenticationUtils, CustomerLoginInfoService customerLoginInfoService, UserService userService, TicketService ticketService, ContractService contractService, LeadService leadService, FileService fileService,
+    DepensesService depensesService) {
         this.customerService = customerService;
         this.authenticationUtils = authenticationUtils;
         this.customerLoginInfoService = customerLoginInfoService;
@@ -43,6 +47,7 @@ public class CustomerProfileController {
         this.contractService = contractService;
         this.leadService = leadService;
         this.fileService = fileService;
+        this.depensesService = depensesService;
     }
 
     @GetMapping("/profile")
@@ -101,6 +106,16 @@ public class CustomerProfileController {
 
         model.addAttribute("tickets", tickets);
         return "customer-info/my-tickets";
+    }
+    
+    @GetMapping("/expenses")
+    public String showMyExpenses(Model model, Authentication authentication){ 
+        int userId = authenticationUtils.getLoggedInUserId(authentication);
+        // System.out.println("User id "+userId);
+        // System.out.println(depensesService.findAllNotConfirm(userId).size());
+        model.addAttribute("expenses", depensesService.findAllNotConfirm(userId));
+        model.addAttribute("depense", new Depenses());
+        return "expenses/confirm";
     }
 
     @GetMapping("/my-leads")
